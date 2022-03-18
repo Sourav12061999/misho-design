@@ -17,10 +17,6 @@ interface Props {
 }
 function cardBox(props: Props) {
   const { size, data } = props;
-  console.log(size);
-
-  console.log(data);
-
   const displayXS = {
     display: { xs: "block", sm: "none" },
   };

@@ -4,6 +4,7 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import MovieSlider from "../components/Moviecard/movieSlider";
 import { GetStaticProps, GetStaticPropsContext } from "next";
+import Slider from "../components/Full Screen Slider/slider";
 interface RecentData {
   id: number;
   heading: string;
@@ -26,7 +27,9 @@ const Home = (props: Props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
+        <Slider />
         <MovieSlider heading="Recent Movies" data={recentData} />
+        <MovieSlider heading="Popular Movies" data={popularData} />
       </main>
     </div>
   );
