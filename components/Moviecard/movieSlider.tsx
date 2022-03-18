@@ -1,9 +1,9 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Carousel from "react-material-ui-carousel";
 import MovieCard from "./movieCard";
 import { Typography } from "@mui/material";
+import useArraydevider from "../../Hooks/useArraydevider";
+import CardBox from "./cardBox";
 interface Data {
   id: number;
   heading: string;
@@ -18,6 +18,7 @@ interface Props {
 }
 export default function MovieSlider(props: Props) {
   const { heading, data } = props;
+  const { smarr, mdarr, lgarr, xsarr } = useArraydevider(data);
   return (
     <Box>
       <Box sx={{ flexGrow: 1 }}>
@@ -31,13 +32,17 @@ export default function MovieSlider(props: Props) {
             </Grid>
           ))}
         </Grid> */}
-        <Carousel swipe animation="slide" indicators={false}>
+        {/* <Carousel swipe animation="slide" indicators={false}>
           {data.map((element: Data) => (
             <React.Fragment key={element.id}>
               <MovieCard data={element} />
             </React.Fragment>
           ))}
-        </Carousel>
+        </Carousel> */}
+        <CardBox data={lgarr} size="lg" />
+        <CardBox data={mdarr} size="md" />
+        <CardBox data={smarr} size="sm" />
+        <CardBox data={xsarr} size="xs" />
       </Box>
     </Box>
   );
