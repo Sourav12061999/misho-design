@@ -3,7 +3,9 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import MovieSlider from "../components/Moviecard/movieSlider";
-const Home: NextPage = () => {
+const Home: NextPage = ({ popularRes, recentRes }) => {
+  console.log(popularRes);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -12,11 +14,29 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <MovieSlider />
-      </main>
+      <main className={styles.main}>{/* <MovieSlider /> */}</main>
     </div>
   );
 };
 
 export default Home;
+
+export async function getStaticProps() {
+  const popularRes = await fetch(
+    "https://api.themoviedb.org/3/trending/movie/week?api_key=84bd2ca964c1790070846809a1b4300b"
+  );
+  const popularData = await popularRes.json();
+  console.log(popularData);
+
+  const recentRes = await fetch(
+    `https://api.themoviedb.org/3/movie/now_playing?api_key=84bd2ca964c1790070846809a1b4300b&language=en-US&page=1`
+  );
+  const recentData = await recentRes.json();
+  return {
+    props: {
+      popularData,
+      recentData,
+    },
+    revalidate: 43200,
+  };
+}
