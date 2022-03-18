@@ -6,14 +6,16 @@ import MovieCard from "./movieCard";
 import { Typography } from "@mui/material";
 
 interface Data {
-  movieName: string;
-  image: string;
+  id: number;
+  heading: string;
   about: string;
+  image: string;
   rating: number;
+  rate_count: number;
 }
 interface Props {
   heading: string;
-  data: [Data];
+  data: Array<Data>;
 }
 export default function MovieSlider(props: Props) {
   const { heading, data } = props;
@@ -24,18 +26,11 @@ export default function MovieSlider(props: Props) {
           {heading}
         </Typography>
         <Grid container spacing={2}>
-          <Grid item sm={6} xs={12} md={4} lg={3}>
-            <MovieCard />
-          </Grid>
-          <Grid item sm={6} xs={12} md={4} lg={3}>
-            <MovieCard />
-          </Grid>
-          <Grid item sm={6} xs={12} md={4} lg={3}>
-            <MovieCard />
-          </Grid>
-          <Grid item sm={6} xs={12} md={4} lg={3}>
-            <MovieCard />
-          </Grid>
+          {data.map((element: Data) => (
+            <Grid item key={element.id} sm={6} xs={12} md={4} lg={3}>
+              <MovieCard data={element} />
+            </Grid>
+          ))}
         </Grid>
       </Box>
     </Box>
