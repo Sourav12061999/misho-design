@@ -4,6 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import useLongstrConvt from "../../Hooks/useLongstrConvt";
+import { useRouter } from "next/router";
 interface Data {
   id: number;
   heading: string;
@@ -18,6 +19,7 @@ interface Props {
 export default function MovieCard(props: Props) {
   const { data } = props;
   const about = useLongstrConvt(data.about);
+  const router = useRouter();
   return (
     <Card sx={{ maxWidth: 345, minHeight: "350px" }}>
       <CardMedia
@@ -25,6 +27,14 @@ export default function MovieCard(props: Props) {
         height="140"
         image={`https://image.tmdb.org/t/p/w500/${data.image}`}
         alt="green iguana"
+        onClick={() => {
+          router.push(`/moviedetails/${data.id}`);
+        }}
+        sx={{
+          ":hover": {
+            cursor: "pointer",
+          },
+        }}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
