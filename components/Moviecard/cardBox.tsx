@@ -49,8 +49,8 @@ function cardBox(props: Props) {
       animation="slide"
       indicators={false}
     >
-      {data.map((el) => (
-        <Grid container spacing={2}>
+      {data.map((el, i) => (
+        <Grid container key={i} spacing={2}>
           {el.map((element: Data) => (
             <Grid item key={element.id} sm={6} xs={12} md={4} lg={3}>
               <MovieCard data={element} />
