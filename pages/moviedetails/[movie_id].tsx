@@ -2,6 +2,27 @@ import React from "react";
 import Head from "next/head";
 import { GetStaticProps, GetStaticPropsContext } from "next";
 import styles from "../../styles/Home.module.css";
+
+interface MoviedetailsInterface {
+  title: string;
+  image: string;
+  rating: number;
+  rateCount: number;
+  about: string;
+  homepage: string;
+}
+interface videoInterface {
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string;
+  site: string;
+  size: number;
+  type: string;
+  official: boolean;
+  published_at: string;
+  id: string;
+}
 function Moviedetails() {
   return (
     <>
@@ -46,17 +67,22 @@ export const getStaticProps: GetStaticProps = async (
       el.site === "Youtube" && (el.type === "Teaser" || el.type === "Trailer")
     );
   });
+  const details: MoviedetailsInterface = {
+    title: data.original_title,
+    image: data.poster_path,
+    rating: data.vote_average,
+    rateCount: data.vote_count,
+    about: data.overview,
+    homepage: data.homepage,
+  };
+
+  const videos: Array<videoInterface> = data2_filtered.length
+    ? data2_filtered
+    : [data2.results[0]];
   return {
     props: {
-      details: {
-        title: data.original_title,
-        image: data.poster_path,
-        rating: data.vote_average,
-        rateCount: data.vote_count,
-        about: data.overview,
-        homepage: data.homepage,
-      },
-      videos: data2_filtered.length ? data2_filtered : data2.results[0],
+      details,
+      videos,
     },
     revalidate: 43200,
   };
