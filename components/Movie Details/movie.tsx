@@ -32,7 +32,7 @@ function Movie(props: Props) {
   return (
     <Box sx={{ display: "flex" }}>
       <Poster videos={videos} image={details.image} />
-      <Details />
+      <Details details={details} />
     </Box>
   );
 }
