@@ -23,7 +23,13 @@ interface videoInterface {
   published_at: string;
   id: string;
 }
-function Moviedetails() {
+
+interface Props {
+  details: MoviedetailsInterface;
+  videos: Array<videoInterface>;
+}
+function Moviedetails(props: Props) {
+  const { details, videos } = props;
   return (
     <>
       <Head>
@@ -78,7 +84,9 @@ export const getStaticProps: GetStaticProps = async (
 
   const videos: Array<videoInterface> = data2_filtered.length
     ? data2_filtered
-    : [data2.results[0]];
+    : data2.length > 0
+    ? data2.results[0]
+    : [];
   return {
     props: {
       details,
