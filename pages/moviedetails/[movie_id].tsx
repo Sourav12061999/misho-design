@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 import { GetStaticProps, GetStaticPropsContext } from "next";
 import styles from "../../styles/Home.module.css";
-
+import Movie from "../../components/Movie Details/movie";
 interface MoviedetailsInterface {
   title: string;
   image: string;
@@ -40,7 +40,9 @@ function Moviedetails(props: Props) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}></main>
+      <main className={styles.main}>
+        <Movie />
+      </main>
     </>
   );
 }
