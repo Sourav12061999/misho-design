@@ -40,8 +40,8 @@ function Moviedetails(props: Props) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <Movie />
+      <main style={{ width: "90%", marginTop: "20px", margin: "auto" }}>
+        <Movie details={details} videos={videos} />
       </main>
     </>
   );
