@@ -54,7 +54,6 @@ export const getStaticProps: GetStaticProps = async (
         rating: data.vote_average,
         rateCount: data.vote_count,
         about: data.overview,
-        genere: data.genere,
         homepage: data.homepage,
       },
       videos: data2_filtered.length ? data2_filtered : data2.results[0],
