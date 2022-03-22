@@ -12,8 +12,21 @@ interface MoviedetailsInterface {
   about: string;
   homepage: string;
 }
+interface videoInterface {
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string;
+  site: string;
+  size: number;
+  type: string;
+  official: boolean;
+  published_at: string;
+  id: string;
+}
 interface Props {
   details: MoviedetailsInterface;
+  videos: Array<videoInterface>;
 }
 function Details(props: Props) {
   const { details } = props;
