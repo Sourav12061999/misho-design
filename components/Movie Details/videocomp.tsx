@@ -4,13 +4,19 @@ import Dialog from "@mui/material/Dialog";
 
 interface SimpleDialogProps {
   open: boolean;
+  setOpen: Function;
 }
 
 export default function Videocomp(props: SimpleDialogProps) {
-  const { open } = props;
+  const { open, setOpen } = props;
 
   return (
-    <Dialog open={open}>
+    <Dialog
+      onClose={() => {
+        setOpen(false);
+      }}
+      open={open}
+    >
       <DialogTitle>See Movie Trailers</DialogTitle>
     </Dialog>
   );

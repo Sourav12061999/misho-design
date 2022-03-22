@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import { FaPlay } from "react-icons/fa";
 import { Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Rating from "@mui/material/Rating";
+import Videocomp from "./videocomp";
 interface MoviedetailsInterface {
   title: string;
   image: string;
@@ -30,6 +31,7 @@ interface Props {
 }
 function Details(props: Props) {
   const { details } = props;
+  const [open, setOpen] = useState<boolean>(false);
   return (
     <Box sx={{ width: "50%", height: "500px" }}>
       <Box sx={{ width: "90%", margin: "auto", marginTop: "20px" }}>
@@ -60,9 +62,16 @@ function Details(props: Props) {
         </Box>
       </Box>
       <Box sx={{ width: "40%", margin: "auto", mt: "10px" }}>
-        <Button variant="contained" startIcon={<FaPlay />}>
+        <Button
+          onClick={() => {
+            setOpen(true);
+          }}
+          variant="contained"
+          startIcon={<FaPlay />}
+        >
           Watch
         </Button>
+        <Videocomp open={open} setOpen={setOpen} />
       </Box>
     </Box>
   );
