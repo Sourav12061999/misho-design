@@ -31,8 +31,8 @@ function Movie(props: Props) {
   const { details, videos } = props;
   return (
     <Box sx={{ display: "flex" }}>
-      <Poster videos={videos} image={details?.image} />
-      <Details details={details} />
+      <Poster image={details?.image} />
+      <Details videos={videos} details={details} />
     </Box>
   );
 }
