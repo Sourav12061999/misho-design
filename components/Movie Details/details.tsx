@@ -26,13 +26,25 @@ function Details(props: Props) {
         <Typography sx={{ color: "white" }} gutterBottom>
           {details?.about}
         </Typography>
-        <Rating
-          name="size-large"
-          value={!details ? 0 : details.rating}
-          readOnly
-          precision={0.5}
-          size="large"
-        />
+        <Box sx={{ display: "flex", marginTop: "15px" }}>
+          <Rating
+            name="size-large"
+            value={!details ? 0 : details.rating}
+            readOnly
+            precision={0.5}
+            size="large"
+          />
+          <Typography
+            sx={{
+              display: "block",
+              color: "white",
+              marginLeft: "5px",
+              marginTop: "4px",
+            }}
+          >
+            {details?.rateCount}
+          </Typography>
+        </Box>
       </Box>
       <Box sx={{ width: "40%", margin: "auto", mt: "10px" }}>
         <Button variant="contained" startIcon={<FaPlay />}>
