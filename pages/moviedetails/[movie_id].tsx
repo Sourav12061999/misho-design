@@ -23,7 +23,6 @@ interface videoInterface {
   published_at: string;
   id: string;
 }
-
 interface Props {
   details: MoviedetailsInterface;
   videos: Array<videoInterface>;
