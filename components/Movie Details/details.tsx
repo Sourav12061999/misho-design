@@ -30,7 +30,7 @@ interface Props {
   videos: Array<videoInterface>;
 }
 function Details(props: Props) {
-  const { details } = props;
+  const { details, videos } = props;
   const [open, setOpen] = useState<boolean>(false);
   return (
     <Box sx={{ width: "50%", height: "500px" }}>
@@ -71,7 +71,7 @@ function Details(props: Props) {
         >
           Watch
         </Button>
-        <Videocomp open={open} setOpen={setOpen} />
+        <Videocomp videos={videos} open={open} setOpen={setOpen} />
       </Box>
     </Box>
   );
