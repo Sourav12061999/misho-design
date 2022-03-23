@@ -11,24 +11,11 @@ interface MoviedetailsInterface {
   about: string;
   homepage: string;
 }
-interface videoInterface {
-  iso_639_1: string;
-  iso_3166_1: string;
-  name: string;
-  key: string;
-  site: string;
-  size: number;
-  type: string;
-  official: boolean;
-  published_at: string;
-  id: string;
-}
 interface Props {
   details: MoviedetailsInterface;
-  videos: Array<videoInterface>;
 }
 function Moviedetails(props: Props) {
-  const { details, videos } = props;
+  const { details } = props;
   return (
     <>
       <Head>
@@ -40,7 +27,7 @@ function Moviedetails(props: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main style={{ width: "90%", marginTop: "30px", margin: "auto" }}>
-        <Movie details={details} videos={videos} />
+        <Movie details={details} />
       </main>
     </>
   );
@@ -65,15 +52,6 @@ export const getStaticProps: GetStaticProps = async (
     `https://api.themoviedb.org/3/movie/${params?.movie_id}?api_key=84bd2ca964c1790070846809a1b4300b&language=en-US`
   );
   let data = await res.json();
-  const res2 = await fetch(
-    `https://api.themoviedb.org/3/movie/${params?.movie_id}/videos?api_key=84bd2ca964c1790070846809a1b4300b&language=en-US`
-  );
-  let data2 = await res2.json();
-  let data2_filtered = data2.results.filter((el: any) => {
-    return (
-      el.site === "Youtube" && (el.type === "Teaser" || el.type === "Trailer")
-    );
-  });
   const details: MoviedetailsInterface = {
     title: data.original_title,
     image: data.poster_path,
@@ -82,16 +60,9 @@ export const getStaticProps: GetStaticProps = async (
     about: data.overview,
     homepage: data.homepage,
   };
-
-  const videos: Array<videoInterface> = data2_filtered.length
-    ? data2_filtered
-    : data2.length > 0
-    ? data2.results[0]
-    : [];
   return {
     props: {
       details,
-      videos,
     },
     revalidate: 43200,
   };

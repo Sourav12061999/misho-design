@@ -2,6 +2,7 @@ import React from "react";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 import Carousel from "react-material-ui-carousel";
+import Iframe from "./iframecomp";
 interface videoInterface {
   iso_639_1: string;
   iso_3166_1: string;
@@ -24,25 +25,27 @@ export default function Videocomp(props: SimpleDialogProps) {
   const { open, setOpen, videos } = props;
 
   return (
-    <Dialog
-      onClose={() => {
-        setOpen(false);
-      }}
-      open={open}
-    >
-      {/* <DialogTitle>See Movie Trailers</DialogTitle> */}
-      <Carousel>
-        {videos.map((el) => (
-          <iframe
-            key={el.key}
-            width="560px"
-            height="315px"
-            src={`https://www.youtube.com/embed/${el.key}`}
-            title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          ></iframe>
-        ))}
-      </Carousel>
-    </Dialog>
+    // <Dialog
+    //   onClose={() => {
+    //     setOpen(false);
+    //   }}
+    //   open={open}
+    // >
+    // <Carousel>
+
+    <div style={{ border: "1px solid red", height: "20px" }}>
+      {/* {videos.map((el) => (
+        <>
+          <Iframe video={el} />
+        </>
+      ))} */}
+      <Iframe
+        video={
+          videos ? { name: "ok", key: "kWznlJ-hG_g", id: "ok" } : videos[1]
+        }
+      />
+    </div>
+    // </Carousel>
+    // </Dialog>
   );
 }

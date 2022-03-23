@@ -4,7 +4,6 @@ import { FaPlay } from "react-icons/fa";
 import { Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Rating from "@mui/material/Rating";
-import Videocomp from "./videocomp";
 interface MoviedetailsInterface {
   title: string;
   image: string;
@@ -13,25 +12,11 @@ interface MoviedetailsInterface {
   about: string;
   homepage: string;
 }
-interface videoInterface {
-  iso_639_1: string;
-  iso_3166_1: string;
-  name: string;
-  key: string;
-  site: string;
-  size: number;
-  type: string;
-  official: boolean;
-  published_at: string;
-  id: string;
-}
 interface Props {
   details: MoviedetailsInterface;
-  videos: Array<videoInterface>;
 }
 function Details(props: Props) {
-  const { details, videos } = props;
-  const [open, setOpen] = useState<boolean>(false);
+  const { details } = props;
   return (
     <Box sx={{ width: "50%", height: "500px" }}>
       <Box sx={{ width: "90%", margin: "auto", marginTop: "20px" }}>
@@ -60,18 +45,6 @@ function Details(props: Props) {
             {details?.rateCount}
           </Typography>
         </Box>
-      </Box>
-      <Box sx={{ width: "40%", margin: "auto", mt: "10px" }}>
-        <Button
-          onClick={() => {
-            setOpen(true);
-          }}
-          variant="contained"
-          startIcon={<FaPlay />}
-        >
-          Watch
-        </Button>
-        <Videocomp videos={videos} open={open} setOpen={setOpen} />
       </Box>
     </Box>
   );
