@@ -30,8 +30,19 @@ export default function Videocomp(props: SimpleDialogProps) {
       }}
       open={open}
     >
-      <DialogTitle>See Movie Trailers</DialogTitle>
-      <Carousel></Carousel>
+      {/* <DialogTitle>See Movie Trailers</DialogTitle> */}
+      <Carousel>
+        {videos.map((el) => (
+          <iframe
+            key={el.key}
+            width="560px"
+            height="315px"
+            src={`https://www.youtube.com/embed/${el.key}`}
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          ></iframe>
+        ))}
+      </Carousel>
     </Dialog>
   );
 }
