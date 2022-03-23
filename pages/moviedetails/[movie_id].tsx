@@ -1,7 +1,6 @@
 import React from "react";
 import Head from "next/head";
 import { GetStaticProps, GetStaticPropsContext } from "next";
-import styles from "../../styles/Home.module.css";
 import Movie from "../../components/Movie Details/movie";
 import MovieSlider from "../../components/Moviecard/movieSlider";
 interface MoviedetailsInterface {
@@ -27,7 +26,7 @@ interface Props {
 function Moviedetails(props: Props) {
   const { details, similar } = props;
   return (
-    <>
+    <div>
       <Head>
         <title>Movie App</title>
         <meta
@@ -36,11 +35,11 @@ function Moviedetails(props: Props) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main style={{ width: "90%", marginTop: "20px", margin: "auto" }}>
+      <main style={{ width: "90%", margin: "auto" }}>
         <Movie details={details} />
         <MovieSlider heading="Similar Movies" data={similar} />
       </main>
-    </>
+    </div>
   );
 }
 export default Moviedetails;
