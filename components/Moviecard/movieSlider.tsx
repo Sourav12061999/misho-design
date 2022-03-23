@@ -18,7 +18,7 @@ interface Props {
 }
 export default function MovieSlider(props: Props) {
   const { heading, data } = props;
-  const { smarr, mdarr, lgarr, xsarr } = useArraydevider(data);
+  const { smarr, mdarr, lgarr, xsarr } = useArraydevider(data || []);
   return (
     <Box sx={{ mt: 5 }}>
       <Box sx={{ flexGrow: 1 }}>

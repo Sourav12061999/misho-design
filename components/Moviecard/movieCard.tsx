@@ -18,17 +18,17 @@ interface Props {
 }
 export default function MovieCard(props: Props) {
   const { data } = props;
-  const about = useLongstrConvt(data.about);
+  const about = useLongstrConvt(data?.about);
   const router = useRouter();
   return (
     <Card sx={{ maxWidth: 345, minHeight: "350px" }}>
       <CardMedia
         component="img"
         height="140"
-        image={`https://image.tmdb.org/t/p/w500/${data.image}`}
+        image={`https://image.tmdb.org/t/p/w500/${data?.image}`}
         alt="green iguana"
         onClick={() => {
-          router.push(`/moviedetails/${data.id}`);
+          router.push(`/moviedetails/${data?.id}`);
         }}
         sx={{
           ":hover": {
@@ -38,7 +38,7 @@ export default function MovieCard(props: Props) {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {data.heading}
+          {data?.heading}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {about}

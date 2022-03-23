@@ -3,6 +3,7 @@ import Head from "next/head";
 import { GetStaticProps, GetStaticPropsContext } from "next";
 import styles from "../../styles/Home.module.css";
 import Movie from "../../components/Movie Details/movie";
+import MovieSlider from "../../components/Moviecard/movieSlider";
 interface MoviedetailsInterface {
   title: string;
   image: string;
@@ -37,6 +38,7 @@ function Moviedetails(props: Props) {
       </Head>
       <main style={{ width: "90%", marginTop: "20px", margin: "auto" }}>
         <Movie details={details} />
+        <MovieSlider heading="Similar Movies" data={similar} />
       </main>
     </>
   );
@@ -65,15 +67,15 @@ export const getStaticProps: GetStaticProps = async (
   const similarRes = await fetch(
     `https://api.themoviedb.org/3/movie/${params?.movie_id}/similar?api_key=84bd2ca964c1790070846809a1b4300b&language=en-US&page=1`
   );
-  let similar = await similarRes.json();
-  similar = similar.results.map((el: Similarmovie) => {
+  let similar = await similarRes?.json();
+  similar = similar?.results.map((el: any) => {
     return {
-      id: el.id,
-      heading: el.heading,
-      about: el.about,
-      image: el.image,
-      rating: el.rating,
-      rate_count: el.rate_count,
+      id: el?.id,
+      heading: el.title,
+      about: el?.overview,
+      image: el.poster_path,
+      rating: el.vote_average,
+      rate_count: el.vote_count,
     };
   });
   const details: MoviedetailsInterface = {
@@ -87,7 +89,7 @@ export const getStaticProps: GetStaticProps = async (
   return {
     props: {
       details,
-      similar,
+      similar: similar || {},
     },
     revalidate: 43200,
   };

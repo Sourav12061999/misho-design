@@ -52,7 +52,7 @@ function cardBox(props: Props) {
       {data.map((el, i) => (
         <Grid container key={i} spacing={2}>
           {el.map((element: Data) => (
-            <Grid item key={element.id} sm={6} xs={12} md={4} lg={3}>
+            <Grid item key={element?.id} sm={6} xs={12} md={4} lg={3}>
               <MovieCard data={element} />
             </Grid>
           ))}
