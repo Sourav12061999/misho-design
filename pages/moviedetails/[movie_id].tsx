@@ -11,11 +11,20 @@ interface MoviedetailsInterface {
   about: string;
   homepage: string;
 }
+interface Similarmovie {
+  id: number;
+  heading: string;
+  about: string;
+  image: string;
+  rating: number;
+  rate_count: number;
+}
 interface Props {
   details: MoviedetailsInterface;
+  similar: Array<Similarmovie>;
 }
 function Moviedetails(props: Props) {
-  const { details } = props;
+  const { details, similar } = props;
   return (
     <>
       <Head>
@@ -26,7 +35,7 @@ function Moviedetails(props: Props) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main style={{ width: "90%", marginTop: "30px", margin: "auto" }}>
+      <main style={{ width: "90%", marginTop: "20px", margin: "auto" }}>
         <Movie details={details} />
       </main>
     </>
@@ -52,6 +61,21 @@ export const getStaticProps: GetStaticProps = async (
     `https://api.themoviedb.org/3/movie/${params?.movie_id}?api_key=84bd2ca964c1790070846809a1b4300b&language=en-US`
   );
   let data = await res.json();
+
+  const similarRes = await fetch(
+    `https://api.themoviedb.org/3/movie/${params?.movie_id}/similar?api_key=84bd2ca964c1790070846809a1b4300b&language=en-US&page=1`
+  );
+  let similar = await similarRes.json();
+  similar = similar.results.map((el: Similarmovie) => {
+    return {
+      id: el.id,
+      heading: el.heading,
+      about: el.about,
+      image: el.image,
+      rating: el.rating,
+      rate_count: el.rate_count,
+    };
+  });
   const details: MoviedetailsInterface = {
     title: data.original_title,
     image: data.poster_path,
@@ -63,6 +87,7 @@ export const getStaticProps: GetStaticProps = async (
   return {
     props: {
       details,
+      similar,
     },
     revalidate: 43200,
   };
